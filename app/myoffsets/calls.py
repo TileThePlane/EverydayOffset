@@ -38,7 +38,7 @@ def show_myoffsets():
                                 }
                    })
 
-@myoffsets.route('/myoffsets', methods=['POST'])
+@myoffsets.route('/myoffsets/<offset_name>', methods=['POST'])
 def modify_myoffsets():
     '''
     Let me know what your POST will look like
