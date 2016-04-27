@@ -18,7 +18,11 @@ app.config(["$routeProvider",function($routeProvider){
           })
 		  .when('/graphtest',{
                 templateUrl: 'pages/testgraph.html'
-          });
+          })
+		  .when('/myoffsets',{
+                templateUrl: 'pages/myoffsets.html'
+          })
+		  ;
 
 }]);
 
