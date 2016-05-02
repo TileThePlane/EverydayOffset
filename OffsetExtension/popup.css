@@ -1,0 +1,28 @@
+body{
+	background-color: #43FFA4;
+	width:300px;
+	height:200px;
+}
+
+.row{
+
+}
+
+
+table{
+	border-spacing: 50px;
+	border-collapse: collapse;
+}
+
+td{
+	/*padding-right:  50px;*/
+	padding: 5px 5px 5px 50px;
+
+}
+td+td{
+	padding-right:50px;
+}
+
+tr:hover{
+	background-color: #37D289;
+}
