@@ -15,9 +15,6 @@ app.config(["$routeProvider",function($routeProvider){
           })
 		  .when('/login',{
                 templateUrl: 'pages/login.html'
-          })
-		  .when('/graphtest',{
-                templateUrl: 'pages/testgraph.html'
           });
 
 }]);
