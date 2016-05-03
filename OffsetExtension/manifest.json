@@ -1,8 +1,10 @@
 {
   "manifest_version": 2,
-
-  "name": "Extension Tester",
-  "description": "This extension will analyze a page using GTmetrix",
+  "background": {
+    "scripts": ["config.js", "offsetcommunication.js"]
+  },
+  "name": "Live Kindly",
+  "description": "This extension will track web activity for your offsets in LiveKindly",
   "version": "1.0",
 
   "browser_action": {
@@ -11,5 +13,7 @@
   },
   "permissions": [
    "activeTab","tabs"
-   ]
+   ],
+   "icons": { "19": "logo.png", "38": "logo.png",
+           "128": "logo.png" }
 }

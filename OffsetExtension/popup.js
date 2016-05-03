@@ -1,8 +1,9 @@
 
-function getOffsets(){
-  var offsets = ["Offset 1", "Offset 2", "Offset 3", "Offset 4"];
-  return offsets
-}
+var config = new Config();
+// var offsetcommunication = new OffsetCommunication(config);
+
+
+
 
 function toggleOffset(e){
   var clickedId = e.srcElement.id;
@@ -13,13 +14,13 @@ function toggleOffset(e){
     } else {
         image.src = "img/play-icon.png";
     }
+  config.toggleOffsetTrack(clickedId);
 
 
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  var offsets = getOffsets();
-  console.log("Offsets: ",offsets)
+  var offsets = config.offsets();
   for(var i in offsets){
     var offsetTable = document.getElementById("offsetTable");
 
@@ -27,10 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var offsetName = row.insertCell(0);
     var offsetToggle = row.insertCell(1);
 
-    offsetName.innerHTML = offsets[i];
+    offsetName.innerHTML = offsets[i].offsetName;
     var button = document.createElement('img');
     button.src = "img/play-icon.png";
-    button.id = offsets[i]
+    button.id = i;
     button.addEventListener("click", toggleOffset)
 
     offsetToggle.appendChild(button)
