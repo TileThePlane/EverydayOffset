@@ -1,4 +1,17 @@
 <div class="container-fluid regular-page  col-md-8 col-md-offset-2" ng-controller="myoffsets">
-<h1>Offsets page</h1>
-<p ng-repeat="d in data.offsets">{{d}}</p>
+	<div class="col-md-2">
+		<div ng-repeat="d in data.offsets" class="offsetboxes">
+			<strong>{{d.name}}</strong>
+			<p>${{d.total_donations}}</p>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<h1>{{data.offsets.offset1.name}}</h1>
+		<p>Active:{{data.offsets.offset1.active}}</p>
+		<p>designer:{{data.offsets.offset1.designer}}</p>
+		<p>donation amount:${{data.offsets.offset1.donation_amount}}</p>
+		<p>total donations:${{data.offsets.offset1.total_donations}}</p>
+		<p>trigger:{{data.offsets.offset1.trigger}}</p>
+		<p>type:{{data.offsets.offset1.type}}</p>
+	</div>
 </div>
