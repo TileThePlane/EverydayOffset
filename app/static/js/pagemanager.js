@@ -4,7 +4,7 @@ var app=angular.module('single-page-app',['ngRoute','ui.bootstrap']);
 //Allows for minifying our angular code.
 app.config(["$routeProvider",function($routeProvider){
       $routeProvider
-          .when('/',{
+          .when('/home',{
                 templateUrl: 'pages/home.html'
           })
           .when('/about',{
@@ -21,8 +21,7 @@ app.config(["$routeProvider",function($routeProvider){
           })
 		  .when('/myoffsets',{
                 templateUrl: 'pages/myoffsets.html'
-          })
-		  ;
+          });
 
 }]);
 

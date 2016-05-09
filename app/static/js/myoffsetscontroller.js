@@ -1,4 +1,7 @@
 app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scope,$window,$http,$timeout){
+
+	$scope.showAddOffset = false;
+
 	//all data about all offsets sent from the server
 	$scope.data ={"offsets":[{"name":"hi","active":"true"}]};
 	
