@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <title>Daily Offset</title>
+	<link rel="stylesheet" href="libs/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/c3.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!--<link rel="stylesheet" href="css/login.css">-->
+</head>
+<body ng-app="single-page-app">
+
+  <div ng-controller="cfgController">
+    <div>
+
+<!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+			<a class="navbar-brand topnav" href="#">Everyday Offset</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+						<a href="#/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Support</a>
+                    </li>
+                    <li>
+                        <a href="#/"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>Maker Blog</a>
+                    </li>
+                    <li>
+                        <a href="#/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>User@email.com</a>
+                    </li>
+                </ul>
+            <!-- /.navbar-collapse -->
+        </div>
+		<div class="container">
+			<ul class = "nav navbar-nav">
+				<li><a href="#/">My Offsets</a></li>
+				<li><a href="#/">Lifetime Offset</a></li>
+				<li><a href="#/">NPO Finder</a></li>
+				<li><a href="#/">Offset Store</a></li>
+			</ul>
+		</div>
+        <!-- /.container -->
+    </nav>
+    </div>
+
+    <div ng-view class="container col-md-12"></div>
+
+
+
+  <br>
+  
+  <!-- script loading -->
+  
+  <!-- non-production script versions -->
+	<script src="libs/jquery.js"></script>
+    <script src="libs/angular.js"></script>
+	<script src="libs/angular-route.js"></script>
+	<script src="libs/angular-animate.js"></script>
+	<script src="libs/ui-bootstrap-tpls.js"></script>
+	
+	<script src="libs/d3.js"></script>
+	<script src="libs/c3.js"></script>
+	
+	<script src="js/pagemanager.js"></script>
+	<script src="js/testgraphcontroller.js"></script>
+	<script src="js/myoffsetscontroller.js"></script>
+
+</body>
+</html>
