@@ -6,9 +6,9 @@ client = MongoClient('localhost', 27017) #connects to local instance of MongoDB 
 
 web_requests = Blueprint('web_requests', __name__)
 
-@web_requests.route('postoffset/<offset_id>', methods=['POST'])
+@web_requests.route('/postoffset/<offset_id>', methods=['POST'])
 def postoffset(offset_id = ''):
-    print(offset_id)
+    return offset_id
     '''
     db = client.offsets
     if db.offsets.find_one({"offset_id" : offset_id}):

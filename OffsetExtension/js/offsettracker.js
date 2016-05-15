@@ -1,4 +1,4 @@
-var conf = new Config();
+var offsethandler = new OffsetHandler();
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   // var currurl = tab.url
   // console.log("updated")
@@ -8,10 +8,12 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if(localStorage.prevurl != currurl){
     console.log(currurl)
      // conf.triggerURL(currurl);
-     conf.incrementOffset(currurl);
+     // conf.incrementOffset(currurl);
      localStorage.prevurl = currurl;
-     conf.sendTriggerUpdate(currurl)
-     // chrome.runtime.sendMessage({trigger: currurl});
+     offsethandler.triggerOffset(currurl);
+     // conf.sendTriggerUpdate(currurl)
+
+
   }
  
   

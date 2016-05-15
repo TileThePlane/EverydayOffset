@@ -1,5 +1,5 @@
 
-var config = new Config();
+var offsethandler = new OffsetHandler();
 localStorage.userid = 111111;
 
 
@@ -13,13 +13,13 @@ function toggleOffset(e){
     } else {
         image.src = "img/play-icon.png";
     }
-  config.toggleOffsetTrack(clickedId);
+  offsethandler.toggleOffset(clickedId);
 
 
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  var offsets = config.offsets();
+  var offsets = offsethandler.getOffsets();
   for(var i in offsets){
     var offsetTable = document.getElementById("offsetTable");
 
@@ -29,7 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     offsetName.innerHTML = offsets[i].offsetName;
     var button = document.createElement('img');
-    button.src = "img/play-icon.png";
+    if(offsets[i].on){
+      button.src = "img/play-icon.png";
+    }
+    else{
+      button.src = "img/pause-icon.png";
+    }
     button.id = i;
     button.addEventListener("click", toggleOffset)
 
