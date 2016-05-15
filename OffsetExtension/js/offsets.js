@@ -4,14 +4,18 @@
  * Abstracts away the underlying storage mechanism.
  */
 function OffsetHandler() {
-	// if (!localStorage.offsetSites) {
-	// localStorage.offsets = JSON.stringify({
-	// 	1001:{"site":"www.google.com","offsetName":"Google Offset","on":true,"triggerCount":0},	
-	// 	1002:{"site":"www.netflix.com","offsetName":"Netflix Offset","on":true,"triggerCount":0},	
-	// 	1003:{"site":"www.amazon.com","offsetName":"Amazon Offset","on":true,"triggerCount":0},	
-	// });
-	var userId = localStorage.userid;
-
+	if (!localStorage.offsets) {
+		localStorage.offsets = JSON.stringify({
+			1001:{"site":"google.com","offsetName":"Google Offset","on":true,"triggerCount":0},	
+			1002:{"site":"netflix.com","offsetName":"Netflix Offset","on":true,"triggerCount":0},	
+			1003:{"site":"amazon.com","offsetName":"Amazon Offset","on":true,"triggerCount":0},	
+		});
+		// localStorage.userid = 1111;
+	}
+	localStorage.prevurl = "";
+	// else{
+	// 	var userId = localStorage.userid;
+	// }
 }
 
 
@@ -121,8 +125,11 @@ var _offsetOn = function(id){
 
 
 var _getID = function(url){
-	var oss = JSON.parse(localStorage.offsets)
+	var oss = _getOffsets();
+	console.log("getting id for:",url);
+	console.log(oss);
 	for (var i in oss){
+		console.log(oss[i]['site'], 'looping');
 		if(oss[i]['site']==url){
 			return i;
 		}
