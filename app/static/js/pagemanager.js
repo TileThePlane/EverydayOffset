@@ -21,6 +21,21 @@ app.config(["$routeProvider",function($routeProvider){
           })
 		  .when('/myoffsets',{
                 templateUrl: 'pages/myoffsets.html'
+          })
+		  .when('/NPOfinder',{
+                templateUrl: 'pages/NPOfinder.html'
+          })
+		  .when('/OffsetStore',{
+                templateUrl: 'pages/OffsetStore.html'
+          })
+		  .when('/lifetimeoffsets',{
+                templateUrl: 'pages/lifetimeoffsets.html'
+          })
+		  .when('/blog',{
+			templateUrl: 'pages/blog.html'
+          })
+		  .when('/support',{
+			templateUrl: 'pages/support.html'
           });
 
 }]);
