@@ -1,7 +1,6 @@
 
 var config = new Config();
-// var offsetcommunication = new OffsetCommunication(config);
-
+localStorage.userid = 111111;
 
 
 

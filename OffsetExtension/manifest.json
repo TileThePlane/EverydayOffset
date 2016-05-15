@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "background": {
-    "scripts": ["config.js", "offsetcommunication.js"]
+    "scripts": ["js/config.js","js/offsettracker.js","js/triggerhandler.js"]
   },
   "name": "Live Kindly",
   "description": "This extension will track web activity for your offsets in LiveKindly",
@@ -9,11 +9,17 @@
 
   "browser_action": {
    "default_icon": "logo.png",
-   "default_popup": "popup.html"
+   "default_popup": "main.html"
   },
   "permissions": [
-   "activeTab","tabs"
+   "activeTab","tabs","webRequest"
    ],
    "icons": { "19": "logo.png", "38": "logo.png",
-           "128": "logo.png" }
+           "128": "logo.png" },
+   "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["js/offsettracker.js","js/triggerhandler.js"],
+      "run_at": "document_start"
+    }]
 }
