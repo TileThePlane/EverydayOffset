@@ -3,7 +3,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scop
 	$scope.showAddOffset = false;
 
 	//all data about all offsets sent from the server
-	$scope.data ={"offsets":[{"name":"hi","active":"true"}]};
+	$scope.data ={"offsets":[{"name":"data not found","active":"true"}]};
 	
 	//data displayed on the page
 	$scope.datacurrentlydisplayed = {};
@@ -19,13 +19,15 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scop
 			method: 'GET'
 		}).then(function successCallback(response){
 			$scope.data = response.data;
+			console.log("data recieved:");
 			console.log($scope.data);
-			$scope.datacurrentlydisplayed = $scope.data.offsets.offset2;
+			$scope.datacurrentlydisplayed = $scope.data.offsets[0];
 		});
 	};
 	//json requests from a server
 	$timeout(function(){
-		$scope.getoffsets('http://localhost:5000/myoffsets');
+		//$scope.getoffsets('http://localhost:5000/myoffsets/bcbafe27-278d-49dc-bc26-139d45136528');
+		$scope.getoffsets('http://localhost:5000/static/mockjsoncalls/myoffsets/useroffsets.json');
 		$scope.$apply();
 	},0);
 }]);

@@ -1,0 +1,43 @@
+{
+	"offsets":[
+				{
+				  "offset_id" : "4d81286d-7d70-41c6-a032-f3bb25dd9f94",
+				  "name" : "fridge offset",
+				  "active" : "TRUE",
+				  "date_registered" : "2016-03-15",
+				  "donation_amount" : 0.5,
+				  "type" : "physical",
+				  "trigger" : "Opening a refridgerator door.",
+				  "designer" : "Everyday Offset",
+				  "total_donations" : 200,
+				  "npo" : "Gamers 4 Starving Kids",
+				  "user_note" : ""                      
+					},
+				{
+				  "offset_id" : "e3a5a964-2a3a-40a3-ba0f-d243660280ce",
+				  "name" : "lamp offset",
+				  "active" : "TRUE",
+				  "date_registered" : "2016-02-13",
+				  "donation_amount" : 0.02,
+				  "type" : "physical",
+				  "trigger" : "Ever second an electrical device is powered.",
+				  "designer" : "Everyday Offset",
+				  "total_donations" : 4435,
+				  "npo" : "March of Dimes",
+				  "user_note" : ""                     
+					},
+				{
+				  "offset_id" : "a07f236d-e105-4ffa-bfe6-54a4c026bf98",
+				  "name" : "netflix offset",
+				  "active" : "TRUE",
+				  "date_registered" : "2016-02-02",
+				  "donation_amount" : 0.02,
+				  "type" : "virtual",
+				  "trigger" : "Ever minute that netflix is watched.",
+				  "designer" : "Everyday Offset",
+				  "total_donations" : 2435, 
+				  "npo" : "Susan G. Komen",
+				  "user_note" : ""                     
+					}
+	]
+}
