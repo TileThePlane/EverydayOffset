@@ -6,7 +6,7 @@
 function OffsetHandler() {
 	if (!localStorage.offsets) {
 		localStorage.offsets = JSON.stringify({
-			1001:{"site":"google.com","offsetName":"Google Offset","on":true,"triggerCount":0},	
+			'c78b344f-353d-4b58-beb9-08cb7ec0d61d':{"site":"google.com","offsetName":"Google Offset","on":true,"triggerCount":0},	
 			1002:{"site":"netflix.com","offsetName":"Netflix Offset","on":true,"triggerCount":0},	
 			1003:{"site":"amazon.com","offsetName":"Amazon Offset","on":true,"triggerCount":0},	
 		});

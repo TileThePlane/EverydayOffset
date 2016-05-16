@@ -8,9 +8,7 @@ web_requests = Blueprint('web_requests', __name__)
 
 @web_requests.route('/postoffset/<offset_id>', methods=['POST'])
 def postoffset(offset_id = ''):
-    return offset_id
-    '''
-    db = client.offsets
+    db = client.test
     if db.offsets.find_one({"offset_id" : offset_id}):
         db.offsets.update_one({"offset_id": offset_id}, {'$inc' : {"counter" : 1}})
         return jsonify({'status' : status.STANDARD_200,
@@ -18,4 +16,3 @@ def postoffset(offset_id = ''):
     else:
         return jsonify({'status':status.STANDARD_404.update({'request_key' : 'offset_id',
                                                    'request_value' : offset_id})})
-    '''
