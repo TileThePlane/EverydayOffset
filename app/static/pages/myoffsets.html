@@ -1,4 +1,25 @@
 <div class="container-fluid regular-page  col-md-8 col-md-offset-2" ng-controller="myoffsets">
-<h1>Offsets page</h1>
-<p ng-repeat="d in data.offsets">{{d}}</p>
+	<div class="col-md-2">
+		<br>
+		<button type="button" class="btn btn-default btn-lg text-center" ng-click="showAddOffset=!showAddOffset">Add Offset...</button>
+		<div ng-repeat="d in data.offsets" class="offsetboxes" ng-click="setcurrentlydisplayed(d)">
+			<strong>{{d.name}}</strong>
+			<p>${{d.total_donations}}</p>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div ng-if="showAddOffset">
+			<h1>Add an Offset</h1>
+			
+		</div>
+		
+		
+		<h1>{{datacurrentlydisplayed.name}}</h1>
+		<p>Active:{{datacurrentlydisplayed.active}}</p>
+		<p>designer:{{datacurrentlydisplayed.designer}}</p>
+		<p>donation amount:${{datacurrentlydisplayed.donation_amount}}</p>
+		<p>total donations:${{datacurrentlydisplayed.total_donations}}</p>
+		<p>trigger:{{datacurrentlydisplayed.trigger}}</p>
+		<p>type:{{datacurrentlydisplayed.type}}</p>
+	</div>
 </div>
