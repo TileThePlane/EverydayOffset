@@ -1,9 +1,10 @@
 app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scope,$window,$http,$timeout){
-
-	$scope.showAddOffset = false;
+	$scope.state = {
+		showAddOffset:false
+	};
 
 	//all data about all offsets sent from the server
-	$scope.data ={"offsets":[{"name":"data not found","active":"true"}]};
+	$scope.data ={"offsets":[]};
 	
 	//data displayed on the page
 	$scope.datacurrentlydisplayed = {};
@@ -11,23 +12,50 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scop
 	//set the data that is displayed on the page.
 	$scope.setcurrentlydisplayed = function(clickedoffset){
 		$scope.datacurrentlydisplayed = clickedoffset;
+		$scope.state.showAddOffset = false;
 	}
 	
-	$scope.getoffsets = function(input_url){
+	
+	
+	$scope.getalloffsets = function(userID){
 		$http({
-			url:input_url,
+			url:"http://localhost:5000/myoffsets/"+userID,
 			method: 'GET'
 		}).then(function successCallback(response){
-			$scope.data = response.data;
-			console.log("data recieved:");
-			console.log($scope.data);
-			$scope.datacurrentlydisplayed = $scope.data.offsets[0];
+			var user = response;
+			console.log(user);
+			var offsetlist = user.data["user_data"].offsets;
+			console.log(offsetlist);
+			
+			var i = 0;
+			var getdata = function(){
+				$http({
+					url:"http://localhost:5000/myoffsets/view="+offsetlist[i],
+					method: 'GET'
+				}).then(function successCallback(response){
+
+					console.log(response);
+					$scope.data['offsets'].push(response.data.offset);
+					if(i==0){
+						$scope.datacurrentlydisplayed = $scope.data.offsets[0];
+					}
+					//loop
+					i = i+1;
+					if(i>=offsetlist.length)
+						return;
+					else
+						getdata();
+				});				
+			};
+			getdata();
+
 		});
 	};
+	
+	
 	//json requests from a server
 	$timeout(function(){
-		//$scope.getoffsets('http://localhost:5000/myoffsets/bcbafe27-278d-49dc-bc26-139d45136528');
-		$scope.getoffsets('http://localhost:5000/static/mockjsoncalls/myoffsets/useroffsets.json');
+		$scope.getalloffsets('bcbafe27-278d-49dc-bc26-139d45136528');
 		$scope.$apply();
 	},0);
 }]);
