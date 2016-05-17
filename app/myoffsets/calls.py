@@ -26,9 +26,9 @@ def myoffsets_myoffset(offset_id = ''):
     '''
     collection = client.offsets
     print(db.offsets.find_one({'offset_id' : offset_id}))
-    if request.method == 'GET':
-        if not offset_id:
+    if not offset_id:
             return jsonify({'status': status.EMPTY_400.update({'request_key' : 'offset_id'})})
+    if request.method == 'GET':
         if offset_id == 'new':
             '''add in Andrews deets from API plan'''
             pass
