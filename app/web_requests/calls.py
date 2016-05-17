@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
-from app.models import status, users, offsets
+from app.models import status
 from pymongo import MongoClient
 import datetime
 
 client = MongoClient('localhost', 27017) #connects to local instance of MongoDB server
+db = client.test
 
 web_requests = Blueprint('web_requests', __name__)
 
@@ -24,3 +25,7 @@ def postoffset(offset_id = ''):
         pass
     return jsonify({'status':status.STANDARD_404.update({'request_key' : 'offset_id',
                                            'request_value' : offset_id})})
+    
+@web_requests.route('/createoffset/<user_id>=<offset_id>', methods=['POST'])
+def createoffset(user_id = '', offset_id = ''):
+    pass
