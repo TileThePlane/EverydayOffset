@@ -1,4 +1,4 @@
-app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scope,$window,$http,$timeout){
+app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleService',function($scope,$window,$http,$timeout,c3SimpleService){
 	$scope.state = {
 		showAddOffset:false
 	};
