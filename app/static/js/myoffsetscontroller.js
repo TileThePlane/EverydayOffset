@@ -55,7 +55,8 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scop
 	
 	//json requests from a server
 	$timeout(function(){
-		$scope.getalloffsets('bcbafe27-278d-49dc-bc26-139d45136528');
+		//$scope.getalloffsets('bcbafe27-278d-49dc-bc26-139d45136528');
+		$scope.getalloffsets('6b8bad38-8350-46a0-97f5-5492c1709062');
 		$scope.$apply();
 	},0);
 }]);
