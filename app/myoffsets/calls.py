@@ -25,7 +25,7 @@ def myoffsets_myoffset(offset_id = ''):
     Let me know what your POST will look like
     '''
     collection = client.offsets
-    print(db.offsets.find_one({'offset_id' : offset_id}))
+    #print(db.offsets.find_one({'offset_id' : offset_id}))
     if request.method == 'GET':
         if not offset_id:
             return jsonify({'status': status.EMPTY_400.update({'request_key' : 'offset_id'})})
