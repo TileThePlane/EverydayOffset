@@ -1,4 +1,4 @@
-var app=angular.module('single-page-app',['ngRoute','ui.bootstrap']);
+var app=angular.module('single-page-app',['ngRoute','ui.bootstrap','angular-c3-simple']);
 
 //When using $ variables from angular, take parameter ex: function($scope){} and format like ["$scope",function($scope){}] 
 //Allows for minifying our angular code.
