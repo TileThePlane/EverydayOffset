@@ -2,7 +2,7 @@
 	<div class="col-md-2">
 		<br>
 		
-		<div class="offsetboxes" ng-click="state.showAddOffset=!state.showAddOffset"><br><strong>Add An Offset</strong><br><br></div>
+		<div class="offsetboxes" ng-click="state.showAddOffset=!state.showAddOffset"><br><strong>Claim An Offset</strong><br><br></div>
 		
 		<div ng-repeat="d in data.offsets" class="offsetboxes" ng-click="setcurrentlydisplayed(d)">
 			<strong>{{d.name}}</strong>
@@ -11,7 +11,18 @@
 	</div>
 	<div class="col-md-6">
 		<div ng-if="state.showAddOffset">
-			<h1>Add an Offset</h1>
+			<h1>Claim an Offset</h1>
+			<form class="form-horizontal">
+				<div class="form-group">
+						<label for="inputoffsetID" class="col-md-2 control-label">Offset ID</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" id="inputoffsetID" placeholder="Offset ID">
+						</div>
+						<div class="col-md-2">
+							<button type="submit" class="btn btn-default">Add Offset</button>
+						</div>
+				</div>
+			</form>
 			
 		</div>
 		
