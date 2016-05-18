@@ -13,10 +13,21 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout',function($scop
 	$scope.setcurrentlydisplayed = function(clickedoffset){
 		$scope.datacurrentlydisplayed = clickedoffset;
 		$scope.state.showAddOffset = false;
-	}
+	};
 	
+	$scope.updatecurrentoffset = function(){
+		var offsetid = $scope.datacurrentlydisplayed['offset_id'];
+		$http({
+			url:"http://localhost:5000/myoffsets/view="+offsetid,
+			method: 'GET'
+		}).then(function successCallback(response){
+			console.log(response);
+			$scope.datacurrentlydisplayed = response.data.offset;
+			console.log($scope.data);
+		});				
+	};
 	
-	
+	//gets all the offset data to build the names on the page, and all graph data as well
 	$scope.getalloffsets = function(userID){
 		$http({
 			url:"http://localhost:5000/myoffsets/"+userID,
