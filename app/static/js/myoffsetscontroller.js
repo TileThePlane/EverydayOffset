@@ -13,6 +13,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 	$scope.setcurrentlydisplayed = function(clickedoffset){
 		$scope.datacurrentlydisplayed = clickedoffset;
 		$scope.state.showAddOffset = false;
+		$scope.donationchart.data.columns = $scope.datacolumns();
 	};
 	
 	$scope.updatecurrentoffset = function(){
@@ -24,6 +25,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 			console.log(response);
 			$scope.datacurrentlydisplayed = response.data.offset;
 			console.log($scope.data);
+
 		});				
 	};
 	
@@ -63,6 +65,72 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 		});
 	};
 	
+	/*$scope.datatransform = function(offset,chartdatatype){
+		if(jQuery.isEmptyObject(offset))
+			return [chartdatatype];
+		var result = [chartdatatype];
+		for(var i =0;i<offset.offset_events.length;i++){
+			result.push(offset.offset_events[i][chartdatatype]);
+		}
+		console.log("data");
+		console.log(result);
+		return result;
+	};*/
+	
+	$scope.datacolumns = function(){
+		if(jQuery.isEmptyObject($scope.datacurrentlydisplayed))
+			return [['date_time_stamp'],['donation_amount']];
+		var result = [['date_time_stamp'],['donation_amount']];
+		$scope.datacurrentlydisplayed.offset_events.sort(function(a,b){
+			var datea = Date.parse(a.date_time_stamp.substring(0,10));
+			var dateb = Date.parse(b.date_time_stamp.substring(0,10));
+			console.log(datea);
+			if(datea<dateb)
+				return -1;
+			if (datea>dateb)
+				return 1;
+			return 0
+		});
+		console.log($scope.datacurrentlydisplayed);
+		for(var i =0;i<$scope.datacurrentlydisplayed.offset_events.length;i++){
+			result[0].push($scope.datacurrentlydisplayed.offset_events[i]['date_time_stamp'].substring(0,10));
+			result[1].push($scope.datacurrentlydisplayed.offset_events[i]['donation_amount']);
+		}
+		
+		return result;
+	};
+	
+	$scope.donationchart = {
+      data : {
+        x: 'date_time_stamp',
+        type: 'line',
+        columns: $scope.datacolumns()
+      },
+      axis: {
+        x:{
+          type: "timeseries",
+          tick: {
+            format: function(value) {
+              var month = value.getUTCMonth() + 1;
+              var year = value.getUTCFullYear();
+			  var day = value.getUTCDay();
+              //return month + '-' + year;
+			  return month + '-' + day+ '-'+year;
+            }
+          }
+        }
+      },
+      tooltip: {
+        format: {
+          value: function (value, ratio, id) {
+              return value;
+          }
+        }
+      },
+      legend: {
+        show: false
+      }
+    };
 	
 	//json requests from a server
 	$timeout(function(){

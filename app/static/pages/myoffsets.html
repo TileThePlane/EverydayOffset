@@ -1,4 +1,4 @@
-<div class="container-fluid regular-page  col-md-8 col-md-offset-2" ng-controller="myoffsets">
+<div class="container-fluid regular-page  col-md-10 col-md-offset-1" ng-controller="myoffsets">
 	<div class="col-md-2">
 		<br>
 		
@@ -9,7 +9,7 @@
 			<p>{{d.npo}}</p>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-10">
 		<div ng-if="state.showAddOffset">
 			<h1>Claim an Offset</h1>
 			<form class="form-horizontal">
@@ -37,6 +37,7 @@
 			<p>trigger:{{datacurrentlydisplayed.trigger}}</p>
 			<p>type:{{datacurrentlydisplayed.type}}</p>
 			<p>note:{{datacurrentlydisplayed.note}}</p>
+			<c3-simple id="donationchart" config="donationchart"></c3-simple>
 			<p ng-repeat="item in datacurrentlydisplayed.offset_events">Data:{{item}}</p>
 		</div>
 	</div>
