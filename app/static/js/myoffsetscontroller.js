@@ -82,14 +82,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 			return [['date_time_stamp'],['donation_amount']];
 		var result = [['date_time_stamp'],['donation_amount']];
 		$scope.datacurrentlydisplayed.offset_events.sort(function(a,b){
-			var datea = Date.parse(a.date_time_stamp.substring(0,10));
-			var dateb = Date.parse(b.date_time_stamp.substring(0,10));
-			console.log(datea);
-			if(datea<dateb)
-				return -1;
-			if (datea>dateb)
-				return 1;
-			return 0
+			return a.date_time_stamp.localeCompare(b.date_time_stamp);
 		});
 		console.log($scope.datacurrentlydisplayed);
 		for(var i =0;i<$scope.datacurrentlydisplayed.offset_events.length;i++){
@@ -111,6 +104,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
           type: "timeseries",
           tick: {
             format: function(value) {
+			console.log(value);
               var month = value.getUTCMonth() + 1;
               var year = value.getUTCFullYear();
 			  var day = value.getUTCDay();
