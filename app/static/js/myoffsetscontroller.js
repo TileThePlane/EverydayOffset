@@ -80,6 +80,8 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 	$scope.datacolumns = function(){
 		if(jQuery.isEmptyObject($scope.datacurrentlydisplayed))
 			return [['date_time_stamp'],['donation_amount']];
+		
+		/*
 		var result = [['date_time_stamp'],['donation_amount']];
 		$scope.datacurrentlydisplayed.offset_events.sort(function(a,b){
 			return a.date_time_stamp.localeCompare(b.date_time_stamp);
@@ -90,13 +92,22 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 			result[1].push($scope.datacurrentlydisplayed.offset_events[i]['donation_amount']);
 		}
 		
+		return result;*/
+		var result = [['date_time_stamp'],['donation_amount']];
+		console.log($scope.datacurrentlydisplayed['date_time_stamp_list']);
+		//Array.prototype.push.apply(result[0],$scope.datacurrentlydisplayed['date_time_stamp_list']);
+		for(var i=0;i<$scope.datacurrentlydisplayed['date_time_stamp_list'].length;i++){
+			result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i].substring(0,10));
+		}
+		Array.prototype.push.apply(result[1],$scope.datacurrentlydisplayed['donation_amount_list']);
+		console.log(result);
 		return result;
 	};
 	
 	$scope.donationchart = {
       data : {
         x: 'date_time_stamp',
-        type: 'line',
+        type: 'bar',
         columns: $scope.datacolumns()
       },
       axis: {
@@ -129,7 +140,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 	//json requests from a server
 	$timeout(function(){
 		//$scope.getalloffsets('bcbafe27-278d-49dc-bc26-139d45136528');
-		$scope.getalloffsets('6b8bad38-8350-46a0-97f5-5492c1709062');
+		$scope.getalloffsets('f2290d1a-781e-46b1-b2f2-458e1bb385c1');
 		$scope.$apply();
 	},0);
 }]);
