@@ -1,8 +1,13 @@
 app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleService',function($scope,$window,$http,$timeout,c3SimpleService){
 	$scope.state = {
-		showAddOffset:false
+		showAddOffset:false,
+		graphdatadisplayed:5*60*1000
 	};
-
+	
+	$scope.setGraphDataDisplayed = function(time){
+		$scope.state.graphdatadisplayed = time;
+	};
+	
 	//all data about all offsets sent from the server
 	$scope.data ={"offsets":[]};
 	
@@ -22,9 +27,9 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 			url:"http://localhost:5000/myoffsets/view="+offsetid,
 			method: 'GET'
 		}).then(function successCallback(response){
-			console.log(response);
+			//console.log(response);
 			$scope.datacurrentlydisplayed = response.data.offset;
-			console.log($scope.data);
+			//console.log($scope.data);
 
 		});				
 	};
@@ -36,9 +41,9 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 			method: 'GET'
 		}).then(function successCallback(response){
 			var user = response;
-			console.log(user);
+			//console.log(user);
 			var offsetlist = user.data["user_data"].offsets;
-			console.log(offsetlist);
+			//console.log(offsetlist);
 			
 			var i = 0;
 			var getdata = function(){
@@ -47,10 +52,11 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 					method: 'GET'
 				}).then(function successCallback(response){
 
-					console.log(response);
+					//console.log(response);
 					$scope.data['offsets'].push(response.data.offset);
 					if(i==0){
 						$scope.datacurrentlydisplayed = $scope.data.offsets[0];
+						$scope.donationchart.data.columns = $scope.datacolumns();
 					}
 					//loop
 					i = i+1;
@@ -77,37 +83,36 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 		return result;
 	};*/
 	
+	
+	/*
+	transforms data from server into c3 code.
+	*/
 	$scope.datacolumns = function(){
 		if(jQuery.isEmptyObject($scope.datacurrentlydisplayed))
 			return [['date_time_stamp'],['donation_amount']];
 		
-		/*
+
 		var result = [['date_time_stamp'],['donation_amount']];
-		$scope.datacurrentlydisplayed.offset_events.sort(function(a,b){
-			return a.date_time_stamp.localeCompare(b.date_time_stamp);
-		});
-		console.log($scope.datacurrentlydisplayed);
-		for(var i =0;i<$scope.datacurrentlydisplayed.offset_events.length;i++){
-			result[0].push($scope.datacurrentlydisplayed.offset_events[i]['date_time_stamp'].substring(0,10));
-			result[1].push($scope.datacurrentlydisplayed.offset_events[i]['donation_amount']);
-		}
-		
-		return result;*/
-		var result = [['date_time_stamp'],['donation_amount']];
-		console.log($scope.datacurrentlydisplayed['date_time_stamp_list']);
-		//Array.prototype.push.apply(result[0],$scope.datacurrentlydisplayed['date_time_stamp_list']);
+		//console.log($scope.datacurrentlydisplayed['date_time_stamp_list']);
+		var timefilter = Date.now() - $scope.state.graphdatadisplayed;
 		for(var i=0;i<$scope.datacurrentlydisplayed['date_time_stamp_list'].length;i++){
-			result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i].substring(0,10));
+			//condition where we'd put the distance back we want to go
+			//if(timefilter<$scope.datacurrentlydisplayed['date_time_stamp_list'][i])
+			if(true){
+				result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i].substring(0,10));
+				result[1].push($scope.datacurrentlydisplayed['donation_amount_list'][i]+(Math.random()/10));
+				//result[1].push($scope.datacurrentlydisplayed['donation_amount_list'][i]);
+			}
 		}
-		Array.prototype.push.apply(result[1],$scope.datacurrentlydisplayed['donation_amount_list']);
-		console.log(result);
+		//console.log(result);
 		return result;
 	};
+	
 	
 	$scope.donationchart = {
       data : {
         x: 'date_time_stamp',
-        type: 'bar',
+        type: 'area',
         columns: $scope.datacolumns()
       },
       axis: {
@@ -115,7 +120,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
           type: "timeseries",
           tick: {
             format: function(value) {
-			console.log(value);
+			//console.log(value);
               var month = value.getUTCMonth() + 1;
               var year = value.getUTCFullYear();
 			  var day = value.getUTCDay();
@@ -136,11 +141,29 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
         show: false
       }
     };
+
+	var polltimeout = 0;
+	$scope.poller = function() {
+    $http.get('http://localhost:5000/myoffsets/view='+$scope.datacurrentlydisplayed['offset_id']).then(function(response) {
+      $scope.datacurrentlydisplayed = response.data.offset;
+	  c3SimpleService['#donationchart'].load({columns:$scope.datacolumns()});
+	  console.log('polled');
+      polltimeout = $timeout($scope.poller, 3000);
+    });      
+  };
+  
+    $scope.$on("$destroy", function() {
+        if (polltimeout) {
+            $timeout.cancel(polltimeout);
+        }
+    });
+
 	
 	//json requests from a server
 	$timeout(function(){
 		//$scope.getalloffsets('bcbafe27-278d-49dc-bc26-139d45136528');
 		$scope.getalloffsets('f2290d1a-781e-46b1-b2f2-458e1bb385c1');
 		$scope.$apply();
+		$scope.poller();
 	},0);
 }]);
