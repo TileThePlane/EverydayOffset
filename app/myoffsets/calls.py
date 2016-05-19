@@ -38,7 +38,6 @@ def myoffsets_myoffset(offset_id = ''):
                 donation_amount_list = []
                 time_stamp_list = []
                 for event in offset['offset_events']:
-                    print(event)
                     npo_list.append(event['npo'])
                     donation_amount_list.append(event['donation_amount'])
                     time_stamp_list.append(event['date_time_stamp'])
@@ -53,7 +52,8 @@ def myoffsets_myoffset(offset_id = ''):
         
         elif request.method == 'POST':
             pass
-    except KeyError:
+    except KeyError as e:
+        print(e)
         return jsonify({'status': status.EMPTY_400.update({'request_key' : 'offset_id'})})
     
     
