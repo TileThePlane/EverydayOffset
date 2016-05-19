@@ -24,6 +24,7 @@ def myoffsets_myoffset(offset_id = ''):
     Let me know what your POST will look like
     '''
     #print(db.offsets.find_one({'offset_id' : offset_id}))
+    #try:
     if request.method == 'GET':
         if not offset_id:
             return jsonify({'status': status.EMPTY_400.update({'request_key' : 'offset_id'})})
@@ -39,7 +40,7 @@ def myoffsets_myoffset(offset_id = ''):
             for event in offset['offset_events']:
                 npo_list.append(event['npo'])
                 donation_amount_list.append(event['donation_amount'])
-                time_stamp_list.append(event['date_time_stamp'])
+                time_stamp_list.append(event["data_time_stamp"])
             del offset['offset_events'] 
             offset['npo_list'] = npo_list
             offset['donation_amount_list'] = donation_amount_list
@@ -47,9 +48,13 @@ def myoffsets_myoffset(offset_id = ''):
             return jsonify({'status' : status.STANDARD_200,
                             'offset' : offset})
         return jsonify({'status':status.STANDARD_404.update({'request_key' : 'offset_id',
-                                                   'request_value' : offset_id})}) 
-        
+                                                   'request_value' : offset_id})})
+    
     elif request.method == 'POST':
         pass
-    
+        '''
+    except KeyError as e:
+        print(e)
+        return jsonify({'status': status.EMPTY_400.update({'request_key' : 'offset_id'})})
+    '''
     
