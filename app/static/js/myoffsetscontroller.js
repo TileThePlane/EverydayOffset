@@ -51,6 +51,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 					$scope.data['offsets'].push(response.data.offset);
 					if(i==0){
 						$scope.datacurrentlydisplayed = $scope.data.offsets[0];
+						$scope.donationchart.data.columns = $scope.datacolumns();
 					}
 					//loop
 					i = i+1;
