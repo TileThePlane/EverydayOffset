@@ -38,6 +38,7 @@ def myoffsets_myoffset(offset_id = ''):
                 donation_amount_list = []
                 time_stamp_list = []
                 for event in offset['offset_events']:
+                    print(event)
                     npo_list.append(event['npo'])
                     donation_amount_list.append(event['donation_amount'])
                     time_stamp_list.append(event['date_time_stamp'])
