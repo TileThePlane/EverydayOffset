@@ -1,5 +1,5 @@
 import socket
-import datetime
+import time
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017) #connects to local instance of MongoDB server
@@ -17,7 +17,7 @@ while 1:
             db.offsets.update_one({'offset_id' : offset_id}, {'$inc' : { 'counter' : 1 }})
             db.offsets.update_one({'offset_id' : offset_id}, {'$push' : { 'offset_event' : {'donation_amount' : offset['donation_amount'],
                                                                           'npo' : offset['npo'],
-                                                                          'data_time_stamp' : datetime.datetime.utcnow() }}})
+                                                                          'data_time_stamp' : int(time.time()) }}})
     #raised if offset_id not found in database
     except TypeError, KeyError:
         pass

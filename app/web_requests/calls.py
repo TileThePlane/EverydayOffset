@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.models import status
 from pymongo import MongoClient
-import datetime
+import time
 
 client = MongoClient('localhost', 27017) #connects to local instance of MongoDB server
 db = client.test
@@ -17,7 +17,7 @@ def postoffset(offset_id = ''):
             db.offsets.update_one({'offset_id' : offset_id}, {'$inc' : { 'counter' : 1 }})
             db.offsets.update_one({'offset_id' : offset_id}, {'$push' : { "offset_events" : {'donation_amount' : offset['donation_amount'],
                                                                                             'npo' : offset['npo'],
-                                                                                            'data_time_stamp' : datetime.datetime.utcnow() }}})
+                                                                                            'data_time_stamp' : int(time.time()) }}})
             return jsonify({'status' : status.STANDARD_200,
                             'offset_id' : offset_id})
     #raised if offset_id not found in database
