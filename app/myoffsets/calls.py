@@ -9,7 +9,6 @@ myoffsets = Blueprint('myoffsets', __name__)
 
 @myoffsets.route('/myoffsets/<user_id>', methods=['GET'])
 def myoffset(user_id = ''):
-    collection = client.users
     user_data = db.users.find_one({'user_id':user_id})
     if user_data:#add some field that can use to uniquely ID users, for now password
         del user_data['_id']
@@ -17,14 +16,13 @@ def myoffset(user_id = ''):
                                 'user_data' : user_data})
         
     return jsonify({'status':status.STANDARD_404.update({'request_key' : 'user_pass',
-                                                   'request_value' : user_pass})})
+                                                   'request_value' : user_data})})
     
 @myoffsets.route('/myoffsets/view=<offset_id>', methods=['POST','GET'])
 def myoffsets_myoffset(offset_id = ''):
     '''
     Let me know what your POST will look like
     '''
-    collection = client.offsets
     #print(db.offsets.find_one({'offset_id' : offset_id}))
     if request.method == 'GET':
         if not offset_id:
@@ -35,6 +33,17 @@ def myoffsets_myoffset(offset_id = ''):
         offset = db.offsets.find_one({'offset_id' : offset_id})
         if offset:
             del offset['_id']
+            npo_list = []
+            donation_amount_list = []
+            time_stamp_list = []
+            for event in offset['offset_events']:
+                npo_list.append(event['npo'])
+                donation_amount_list.append(event['donation_amount'])
+                time_stamp_list.append(event['date_time_stamp'])
+            del offset['offset_events'] 
+            offset['npo_list'] = npo_list
+            offset['donation_amount'] = donation_amount_list
+            offset['date_time_stamp'] = time_stamp_list
             return jsonify({'status' : status.STANDARD_200,
                             'offset' : offset})
         return jsonify({'status':status.STANDARD_404.update({'request_key' : 'offset_id',
