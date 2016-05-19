@@ -24,7 +24,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 	$scope.updatecurrentoffset = function(){
 		var offsetid = $scope.datacurrentlydisplayed['offset_id'];
 		$http({
-			url:"http://localhost:5000/myoffsets/view="+offsetid,
+			url:"http://everydayoffset.me:5000/myoffsets/view="+offsetid,
 			method: 'GET'
 		}).then(function successCallback(response){
 			//console.log(response);
@@ -37,7 +37,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 	//gets all the offset data to build the names on the page, and all graph data as well
 	$scope.getalloffsets = function(userID){
 		$http({
-			url:"http://localhost:5000/myoffsets/"+userID,
+			url:"http://everydayoffset.me:5000/myoffsets/"+userID,
 			method: 'GET'
 		}).then(function successCallback(response){
 			var user = response;
@@ -48,7 +48,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 			var i = 0;
 			var getdata = function(){
 				$http({
-					url:"http://localhost:5000/myoffsets/view="+offsetlist[i],
+					url:"http://everydayoffset.me:5000/myoffsets/view="+offsetlist[i],
 					method: 'GET'
 				}).then(function successCallback(response){
 
@@ -144,7 +144,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 
 	var polltimeout = 0;
 	$scope.poller = function() {
-    $http.get('http://localhost:5000/myoffsets/view='+$scope.datacurrentlydisplayed['offset_id']).then(function(response) {
+    $http.get('http://everydayoffset.me:5000/myoffsets/view='+$scope.datacurrentlydisplayed['offset_id']).then(function(response) {
       $scope.datacurrentlydisplayed = response.data.offset;
 	  c3SimpleService['#donationchart'].load({columns:$scope.datacolumns()});
 	  console.log('polled');
