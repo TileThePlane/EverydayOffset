@@ -1,0 +1,12 @@
+{
+ "offset_id" : "6847f24a-1d4f-11e6-b6ba-3e1d05defe78",
+ "offset_events":[],
+ "name":"Website Browsing Tracker",
+ "description":"This sensor will track usage of a selected site",
+ "active":"True",
+ "donation_amount":".005",
+ "total_donations":0,
+ "trigger":"Everytime a link of is clicked from a selected site",
+ "type":"Software",
+ "designer":"Jonathan Hammel"
+}

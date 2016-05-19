@@ -1,0 +1,12 @@
+{
+ "offset_id" : "6847e692-1d4f-11e6-b6ba-3e1d05defe78",
+ "offset_events":[],
+ "name":"Demo Door Sensor",
+ "description":"This sensor is located on the door to enter this room. It has tracked every time the door has been since 3:45 pm today.",
+ "active":"True",
+ "donation_amount":".05",
+ "total_donations":0,
+ "trigger":"Every time a door is opened/closed",
+ "type":"IoT",
+ "designer":"Anne Garrafalo"
+}
