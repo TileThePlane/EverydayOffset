@@ -1,8 +1,13 @@
 app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleService',function($scope,$window,$http,$timeout,c3SimpleService){
 	$scope.state = {
-		showAddOffset:false
+		showAddOffset:false,
+		graphdatadisplayed:5*60*1000
 	};
-
+	
+	$scope.setGraphDataDisplayed = function(time){
+		$scope.state.graphdatadisplayed = time;
+	};
+	
 	//all data about all offsets sent from the server
 	$scope.data ={"offsets":[]};
 	
@@ -78,32 +83,30 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 		return result;
 	};*/
 	
+	
+	/*
+	transforms data from server into c3 code.
+	*/
 	$scope.datacolumns = function(){
 		if(jQuery.isEmptyObject($scope.datacurrentlydisplayed))
 			return [['date_time_stamp'],['donation_amount']];
 		
-		/*
-		var result = [['date_time_stamp'],['donation_amount']];
-		$scope.datacurrentlydisplayed.offset_events.sort(function(a,b){
-			return a.date_time_stamp.localeCompare(b.date_time_stamp);
-		});
-		console.log($scope.datacurrentlydisplayed);
-		for(var i =0;i<$scope.datacurrentlydisplayed.offset_events.length;i++){
-			result[0].push($scope.datacurrentlydisplayed.offset_events[i]['date_time_stamp'].substring(0,10));
-			result[1].push($scope.datacurrentlydisplayed.offset_events[i]['donation_amount']);
-		}
-		
-		return result;*/
+
 		var result = [['date_time_stamp'],['donation_amount']];
 		console.log($scope.datacurrentlydisplayed['date_time_stamp_list']);
-		//Array.prototype.push.apply(result[0],$scope.datacurrentlydisplayed['date_time_stamp_list']);
+		var timefilter = Date.now() - $scope.state.graphdatadisplayed;
 		for(var i=0;i<$scope.datacurrentlydisplayed['date_time_stamp_list'].length;i++){
-			result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i].substring(0,10));
+			//condition where we'd put the distance back we want to go
+			//if(timefilter<$scope.datacurrentlydisplayed['date_time_stamp_list'][i])
+			if(true){
+				result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i].substring(0,10));
+				result[1].push($scope.datacurrentlydisplayed['donation_amount_list'][i]);
+			}
 		}
-		Array.prototype.push.apply(result[1],$scope.datacurrentlydisplayed['donation_amount_list']);
 		console.log(result);
 		return result;
 	};
+	
 	
 	$scope.donationchart = {
       data : {
