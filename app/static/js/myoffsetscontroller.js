@@ -141,17 +141,22 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
         show: false
       }
     };
-	
+
+	var polltimeout = 0;
 	$scope.poller = function() {
     $http.get('http://localhost:5000/myoffsets/view='+$scope.datacurrentlydisplayed['offset_id']).then(function(response) {
       $scope.datacurrentlydisplayed = response.data.offset;
 	  c3SimpleService['#donationchart'].load({columns:$scope.datacolumns()});
 	  console.log('polled');
-      $timeout($scope.poller, 1000);
+      polltimeout = $timeout($scope.poller, 3000);
     });      
   };
   
-
+    $scope.$on("$destroy", function() {
+        if (polltimeout) {
+            $timeout.cancel(polltimeout);
+        }
+    });
 
 	
 	//json requests from a server
