@@ -42,8 +42,8 @@ def myoffsets_myoffset(offset_id = ''):
                 time_stamp_list.append(event['date_time_stamp'])
             del offset['offset_events'] 
             offset['npo_list'] = npo_list
-            offset['donation_amount'] = donation_amount_list
-            offset['date_time_stamp'] = time_stamp_list
+            offset['donation_amount_list'] = donation_amount_list
+            offset['date_time_stamp_list'] = time_stamp_list
             return jsonify({'status' : status.STANDARD_200,
                             'offset' : offset})
         return jsonify({'status':status.STANDARD_404.update({'request_key' : 'offset_id',
