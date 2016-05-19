@@ -5,7 +5,10 @@
 		<fieldset>
 			<legend ng-click="state.showDonationPlanner=!state.showDonationPlanner">{{collapse(state.showDonationPlanner)}} Donation Planner </legend>
 			<div ng-if="state.showDonationPlanner">
-			
+			<p>Charity Donations %</p>
+			<rzslider rz-slider-model="charitydonation" rz-slider-options="sliderconfig"></rzslider>
+			<p>Live Kindly Tip %</p>
+			<rzslider rz-slider-model="100-charitydonation" rz-slider-options="sliderconfig"></rzslider>
 			</div>
 		</fieldset>
 	</form>
