@@ -29,14 +29,7 @@
 		<div ng-if="!state.showAddOffset">
 			<h1>{{datacurrentlydisplayed.name}}</h1>
 			<h3>{{datacurrentlydisplayed.description}}</h3>
-			<p>Offset ID:{{datacurrentlydisplayed.offset_id}}</p>
-			<p>Active:{{datacurrentlydisplayed.active}}</p>
-			<p>designer:{{datacurrentlydisplayed.designer}}</p>
-			<p>donation amount:${{datacurrentlydisplayed.donation_amount}}</p>
-			<p>total donations:${{datacurrentlydisplayed.total_donations}}</p>
-			<p>trigger:{{datacurrentlydisplayed.trigger}}</p>
-			<p>type:{{datacurrentlydisplayed.type}}</p>
-			<p>note:{{datacurrentlydisplayed.note}}</p>
+			
 			<c3-simple id="donationchart" config="donationchart"></c3-simple>
 			<div class="btn-group btn-group-justified" role="group" aria-label="...">
 				<div class="btn-group" role="group">
@@ -55,7 +48,16 @@
 				<button type="button" class="btn btn-default" ng-click="setGraphDataDisplayed(5*60*1000)">Last 5 Minutes</button>
 			  </div>
 			</div>
-			<p ng-repeat="item in datacurrentlydisplayed.offset_events">Data:{{item}}</p>
+			<br>
+			<p><strong>Offset ID:</strong>{{datacurrentlydisplayed.offset_id}}</p>
+			<p><strong>Active:</strong>{{datacurrentlydisplayed.active}}</p>
+			<p><strong>designer:</strong>{{datacurrentlydisplayed.designer}}</p>
+			<p><strong>donation amount:</strong>${{datacurrentlydisplayed.donation_amount}}</p>
+			<p><strong>total donations:</strong>${{datacurrentlydisplayed.total_donations}}</p>
+			<p><strong>trigger:</strong>{{datacurrentlydisplayed.trigger}}</p>
+			<p><strong>type:</strong>{{datacurrentlydisplayed.type}}</p>
+			<p><strong>note:</strong>{{datacurrentlydisplayed.note}}</p>
+
 		</div>
 	</div>
 </div>
