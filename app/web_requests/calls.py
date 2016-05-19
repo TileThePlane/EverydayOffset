@@ -13,13 +13,13 @@ def postoffset(offset_id = ''):
     db = client.test
     offset = db.offsets.find_one({'offset_id' : offset_id})
     try:
-        if offset['activated'] == True:
-            db.offsets.update({'offset_id' : offset_id}, {'$inc' : { 'counter' : 1 }})
-            db.offsets.update({'offset_id' : offset_id}, {'$push' : { "offset_events" : {'donation_amount' : offset['donation_amount'],
-                                                                                            'npo' : offset['npo'],
-                                                                                            'data_time_stamp' : int(time.time()) }}})
-            return jsonify({'status' : status.STANDARD_200,
-                            'offset_id' : offset_id})
+        if offset['activated'] == "True":
+            db.offsets.update_one({'offset_id' : offset['offset_id']}, {'$inc' : { 'total_donations' : 1 }})
+            db.offsets.update_one({'offset_id' : offset['offset_id']}, {'$push' : { 'offset_events' : {'donation_amount' : offset['donation_amount'],
+                                                                          'npo' : offset['npo'],
+                                                                          'data_time_stamp' : int(time.time()) }}})
+        return jsonify({'status' : status.STANDARD_200,
+                        'offset_id' : offset_id})
     #raised if offset_id not found in database
     except TypeError, KeyError:
         pass
