@@ -24,7 +24,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 	$scope.updatecurrentoffset = function(){
 		var offsetid = $scope.datacurrentlydisplayed['offset_id'];
 		$http({
-			url:"http://everydayoffset.me:5000/myoffsets/view="+offsetid,
+			url:"http://localhost:5000/myoffsets/view="+offsetid,
 			method: 'GET'
 		}).then(function successCallback(response){
 			//console.log(response);
@@ -37,7 +37,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 	//gets all the offset data to build the names on the page, and all graph data as well
 	$scope.getalloffsets = function(userID){
 		$http({
-			url:"http://everydayoffset.me:5000/myoffsets/"+userID,
+			url:"http://localhost:5000/myoffsets/"+userID,
 			method: 'GET'
 		}).then(function successCallback(response){
 			var user = response;
@@ -48,7 +48,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 			var i = 0;
 			var getdata = function(){
 				$http({
-					url:"http://everydayoffset.me:5000/myoffsets/view="+offsetlist[i],
+					url:"http://localhost:5000/myoffsets/view="+offsetlist[i],
 					method: 'GET'
 				}).then(function successCallback(response){
 
@@ -98,7 +98,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 		for(var i=0;i<$scope.datacurrentlydisplayed['date_time_stamp_list'].length;i++){
 			//condition where we'd put the distance back we want to go
 			if(timefilter<$scope.datacurrentlydisplayed['date_time_stamp_list'][i]){
-				result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i]);
+				result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i]*1000);
 				//result[1].push($scope.datacurrentlydisplayed['donation_amount_list'][i]+(Math.random()/10));
 				result[1].push($scope.datacurrentlydisplayed['donation_amount_list'][i]);
 			}
@@ -143,7 +143,7 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 
 	var polltimeout = 0;
 	$scope.poller = function() {
-    $http.get('http://everydayoffset.me:5000/myoffsets/view='+$scope.datacurrentlydisplayed['offset_id']).then(function(response) {
+    $http.get('http://localhost:5000/myoffsets/view='+$scope.datacurrentlydisplayed['offset_id']).then(function(response) {
       $scope.datacurrentlydisplayed = response.data.offset;
 	  c3SimpleService['#donationchart'].load({columns:$scope.datacolumns()});
 	  console.log('polled');
