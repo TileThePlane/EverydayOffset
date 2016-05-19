@@ -3,10 +3,12 @@
  "offset_events":[],
  "name":"Website Browsing Tracker",
  "description":"This sensor will track usage of a selected site",
- "active":"True",
+ "activated":"True",
  "donation_amount":".005",
  "total_donations":0,
  "trigger":"Everytime a link of is clicked from a selected site",
  "type":"Software",
- "designer":"Jonathan Hammel"
+ "designer":"Jonathan Hammel",
+ "counter":0,
+ "npo":"Awesome Games Done Quick"
 }

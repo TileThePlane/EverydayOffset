@@ -26,6 +26,15 @@ body {
   margin-bottom: 30px;
 }
 
+.thumbnail{
+	height: 400px;
+	width: 250px;
+}
+
+.row{
+	margin: 25px;
+}
+
 .offsetboxes{
 	border-radius:15px;
 	border: 2px solid #000;

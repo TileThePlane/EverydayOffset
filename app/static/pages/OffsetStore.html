@@ -1,3 +1,14 @@
 <div class="container-fluid regular-page  col-md-8 col-md-offset-2" >
-	<p>Offset Store Coming soon!</p>
+	<div class="row">
+	  <div class="col-sm-6 col-md-3" ng-repeat='i in [{"title":"Refrigerator Offset","description":"A fridge magnetic sensor that sends an offset everytime the fridge door is opened","pic_path":"./img/FridgeTracker.png"},{"title":"Outlet Power Tracker","description":"For every second power is drawn from an outlet an offset is sent","pic_path":"./img/OutletTracker.png"},{"title":"Internet Usage Tracker","description":"For each link clicked at a specified site send an offset donation","pic_path":"./img/InternetUsageTracker.png"},{"title":"Car Mileage Tracker","description":"For each mile traveled in a car make an offset donation","pic_path":"./img/MileageTracker.png"},{"title":"Flush Tracker","description":"For each flush of the toilet you will send off a donation.","pic_path":"./img/FlushTracker.png"}]'>
+	    <div class="thumbnail">
+	      <img src={{i.pic_path}} alt="...">
+	      <div class="caption">
+	        <h2>{{i.title}}</h2>
+	        <p>{{i.description}}</p>
+	        <p><a href="#" class="btn btn-primary" role="button">Purchase</a> </p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>

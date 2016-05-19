@@ -3,10 +3,12 @@
  "offset_events":[],
  "name":"Demo Door Sensor",
  "description":"This sensor is located on the door to enter this room. It has tracked every time the door has been since 3:45 pm today.",
- "active":"True",
+ "activated":"True",
  "donation_amount":".05",
  "total_donations":0,
  "trigger":"Every time a door is opened/closed",
  "type":"IoT",
- "designer":"Anne Garrafalo"
+ "designer":"Anne Garrafalo",
+ "counter":0,
+ "npo":"The Nature Conservancy"
 }

@@ -3,10 +3,12 @@
  "offset_events":[],
  "name":"Outlet Power Usage Sensor",
  "description":"This sensor can track every second a power outlet is being used to power a device",
- "active":"True",
+ "activated":"True",
  "donation_amount":".003",
  "total_donations":0,
  "trigger":"One second of power consumption",
  "type":"IoT",
- "designer":"Anne Garrafalo"
+ "designer":"Anne Garrafalo",
+ "counter":0,
+ "npo":"The Nature Conservancy"
 }
