@@ -97,8 +97,10 @@ app.controller('myoffsets',['$scope','$window','$http','$timeout','c3SimpleServi
 		var timefilter = Date.now() - $scope.state.graphdatadisplayed;
 		for(var i=0;i<$scope.datacurrentlydisplayed['date_time_stamp_list'].length;i++){
 			//condition where we'd put the distance back we want to go
-			if(timefilter<$scope.datacurrentlydisplayed['date_time_stamp_list'][i]){
+			//if(timefilter<$scope.datacurrentlydisplayed['date_time_stamp_list'][i]){
+			if(true){
 				result[0].push($scope.datacurrentlydisplayed['date_time_stamp_list'][i]*1000);
+				console.log($scope.datacurrentlydisplayed['date_time_stamp_list'][i]*1000);
 				//result[1].push($scope.datacurrentlydisplayed['donation_amount_list'][i]+(Math.random()/10));
 				result[1].push($scope.datacurrentlydisplayed['donation_amount_list'][i]);
 			}
